@@ -28,8 +28,7 @@
   "dependencies": {
     "q": "^1.4.1"
   },
-  "optionalDependencies": {
-  },
+  "optionalDependencies": {},
   "gitHead": "",
   "bugs": {
     "url": "https://github.com/mitchellparsons/rc522-rfid-promise/issues"
