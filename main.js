@@ -24,7 +24,8 @@ exports.startListening = function(timeout) {
     });
 
     function endRead() {
-        child.kill();
+        if(child != null)
+            child.kill();
     }
 
     if (typeof timeout === 'number') {
