@@ -3,7 +3,6 @@
 #include <unistd.h>
 #include "rfid.h"
 #include "rc522.h"
-#include "bcm2835.h"
 
 #define DEFAULT_SPI_SPEED 5000L
 
@@ -81,8 +80,6 @@ void RunCallback(const FunctionCallbackInfo<Value>& args) {
                 *(p++)=0;
         }
 
-        bcm2835_spi_end();
-        bcm2835_close();
 }
 
 void Init(Handle<Object> exports, Handle<Object> module) {
@@ -96,16 +93,7 @@ uint8_t initRfidReader(void) {
         sp=(uint16_t)(250000L / DEFAULT_SPI_SPEED);
 //      sp=(uint16_t)64; worked
          sp=(uint16_t)2048;
-        if (!bcm2835_init()) {
-                return 1;
-        }
 
-        bcm2835_spi_begin();
-        bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_MSBFIRST); // The default
-        bcm2835_spi_setDataMode(BCM2835_SPI_MODE0);             // The default
-        bcm2835_spi_setClockDivider(sp);          // The default
-        bcm2835_spi_chipSelect(BCM2835_SPI_CS0);                // The default
-        bcm2835_spi_setChipSelectPolarity(BCM2835_SPI_CS0, LOW); // the default
         return 0;
 }
 
