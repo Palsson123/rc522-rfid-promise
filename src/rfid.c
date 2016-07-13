@@ -24,23 +24,23 @@ tag_stat select_tag_sn(uint8_t * sn, uint8_t * len){
 	if (PcdAnticoll(PICC_ANTICOLL1,buff)!=TAG_OK) {return TAG_ERR;}
 	if (PcdSelect(PICC_ANTICOLL1,buff)!=TAG_OK) {return TAG_ERR;}
 	if (buff[0]==0x88) {
-		memcpy(sn,&buff[1],3);
+		
 		if (PcdAnticoll(PICC_ANTICOLL2,buff)!=TAG_OK) {
 			return TAG_ERR;}
 		if (PcdSelect(PICC_ANTICOLL2,buff)!=TAG_OK) {return TAG_ERR;}
 		if (buff[0]==0x88) {
-			memcpy(sn+3,&buff[1],3);
+		
 			if (PcdAnticoll(PICC_ANTICOLL3,buff)!=TAG_OK) {
 				return TAG_ERR;}
 			if (PcdSelect(PICC_ANTICOLL3,buff)!=TAG_OK) {return TAG_ERR;}
-			memcpy(sn+6,buff,4);
+		
 			*len=10;
 		}else{
-			memcpy(sn+3,buff,4);
+		
 			*len=7;
 		}
 	}else{
-		memcpy(sn,&buff[0],4);
+		
 		*len=4;
 	}
 	return TAG_OK;
