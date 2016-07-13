@@ -9,6 +9,9 @@
 #include <sys/ioctl.h>
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 void Write(char* data, char length);
 char* WriteRead(char* data, char length);
@@ -99,5 +102,7 @@ mraa_spi_context dev;
 char spi_rx[256];
 struct spi_ioc_transfer spi_msg;
 void initGPIO();
-
+#ifdef __cplusplus
+}
+#endif
 #endif
