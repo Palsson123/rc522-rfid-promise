@@ -121,8 +121,7 @@ char PcdAuthState(uint8_t   auth_mode,uint8_t   addr,uint8_t *pKey,uint8_t *pSnr
 
 	ucComMF522Buf[0] = auth_mode;
 	ucComMF522Buf[1] = addr;
-	memcpy(&ucComMF522Buf[2], pKey, 6);
-	memcpy(&ucComMF522Buf[8], pSnr, 4);
+
 
 	status = PcdComMF522(PCD_AUTHENT,ucComMF522Buf,12,ucComMF522Buf,&unLen);
 	if ((status != TAG_OK) || (!(ReadRawRC(Status2Reg) & 0x08)))
@@ -138,7 +137,7 @@ char PcdRead(uint8_t addr,uint8_t *p )
 	uint8_t   i,ucComMF522Buf[MAXRLEN];
 	uint8_t   CRC_buff[2];
 
-	memset(ucComMF522Buf,0,sizeof(ucComMF522Buf));
+	
 	ucComMF522Buf[0] = PICC_READ;
 	ucComMF522Buf[1] = addr;
 	CalulateCRC(ucComMF522Buf,2,&ucComMF522Buf[2]);
