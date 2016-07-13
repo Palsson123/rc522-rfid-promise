@@ -28,6 +28,6 @@ char* WriteRead(char* data, char length) {
     return spi_rx;
 }
 void initGPIO(){
-    gpio = mraa_gpio_init_raw(0);
+    gpio = mraa_gpio_init_raw(1);
     mraa_gpio_dir(gpio, MRAA_GPIO_OUT);
 }
