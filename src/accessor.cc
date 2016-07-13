@@ -38,7 +38,7 @@ void RunCallback(const FunctionCallbackInfo<Value>& args) {
                         // to prevent that the reset is performed the no tag event has to take place multiple times (ger: entrprellen)
                         if (noTagFoundCount > 2) {
                                 // Sets the content of the array 'rfidChipSerialNumberRecentlyDetected' back to zero
-                                //memset(&rfidChipSerialNumberRecentlyDetected[0], 0, sizeof(rfidChipSerialNumberRecentlyDetected));
+                                memset(&rfidChipSerialNumberRecentlyDetected[0], 0, sizeof(rfidChipSerialNumberRecentlyDetected));
                                 noTagFoundCount = 0;
                         }
                         else {
