@@ -1,3 +1,6 @@
+#ifndef LINKIT_SMART_SPI_H
+#define LINKIT_SMART_SPI_H
+
 #include <mraa.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -94,3 +97,4 @@ struct _spi {
 mraa_spi_context dev;
 char spi_rx[256];
 struct spi_ioc_transfer spi_msg;
+#endif
