@@ -31,4 +31,3 @@ void initGPIO(){
     gpio = mraa_gpio_init_raw(0);
     mraa_gpio_dir(gpio, MRAA_GPIO_OUT);
 }
-}
