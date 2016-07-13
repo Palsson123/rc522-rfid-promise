@@ -9,6 +9,8 @@
 #define LED_PIN      44        /**< The pin where the LED is connected */
 
 void Write(char* data, char length) {
+        gpio = mraa_gpio_init_raw(1);
+    mraa_gpio_dir(gpio, MRAA_GPIO_OUT);
     spi_msg.rx_buf = 0; // Block SPI from reading anything.
     spi_msg.tx_buf = (unsigned long)data;
     spi_msg.len = length;
@@ -18,6 +20,8 @@ void Write(char* data, char length) {
     mraa_gpio_write(gpio, 1);
 }
 char* WriteRead(char* data, char length) {
+        gpio = mraa_gpio_init_raw(1);
+    mraa_gpio_dir(gpio, MRAA_GPIO_OUT);
     spi_msg.rx_buf = (unsigned long) spi_rx; // Block SPI from reading anything.
     spi_msg.tx_buf = (unsigned long) data;
     spi_msg.len = length;
@@ -28,6 +32,5 @@ char* WriteRead(char* data, char length) {
     return spi_rx;
 }
 void initGPIO(){
-    gpio = mraa_gpio_init_raw(1);
-    mraa_gpio_dir(gpio, MRAA_GPIO_OUT);
+
 }
