@@ -77,7 +77,7 @@ typedef struct {
 } mraa_adv_func_t;
 
 
-
+mraa_gpio_context gpio;
 
 
 struct _spi {
