@@ -16,10 +16,7 @@
     "url": "https://github.com/mitchellparsons/rc522-rfid-promise.git"
   },
   "scripts": {
-    "install": "(node-gyp rebuild) || (exit 0)",
-    "preinstall": "(node-gyp configure) || (exit 0)",
-    "clean": "((node-gyp clean) && (rm -rf node_modules)) || (exit 0)",
-    "build-debug": "(node-gyp configure --debug && node-gyp rebuild --debug) || (exit 0)"
+    "install": "node-gyp rebuild"
   },
   "main": "./main",
   "dependencies": {
