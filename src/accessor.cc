@@ -2,6 +2,7 @@
 #include <v8.h>
 #include <unistd.h>
 #include "rfid.h"
+#include "spi.h"
 #include "rc522.h"
 
 #define DEFAULT_SPI_SPEED 5000L
@@ -89,7 +90,7 @@ void Init(Handle<Object> exports, Handle<Object> module) {
 
 uint8_t initRfidReader(void) {
 
-
+        initGPIO();
         return 0;
 }
 
