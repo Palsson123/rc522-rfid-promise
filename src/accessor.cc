@@ -66,17 +66,17 @@ void RunCallback(const FunctionCallbackInfo<Value>& args) {
 
                 // Only when the serial number of the currently detected tag differs from the
                 // recently detected tag the callback will be executed with the serial number
-                /*if(strcmp(rfidChipSerialNumberRecentlyDetected, rfidChipSerialNumber) != 0)
+                if(strcmp(rfidChipSerialNumberRecentlyDetected, rfidChipSerialNumber) != 0)
                 {
                         Local<Value> argv[argc] = {
                                 Local<Value>::New(isolate,String::NewFromUtf8(isolate,&rfidChipSerialNumber[0]))
                         };
                         callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);
-                }*/
+                }
 
                 // Preserves the current detected serial number, so that it can be used
                 // for future evaluations
-                //strcpy(rfidChipSerialNumberRecentlyDetected, rfidChipSerialNumber);
+                strcpy(rfidChipSerialNumberRecentlyDetected, rfidChipSerialNumber);
 
                 *(p++)=0;
         }
