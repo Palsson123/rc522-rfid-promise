@@ -1,8 +1,6 @@
 #ifndef LINKIT_SMART_SPI_H
 #define LINKIT_SMART_SPI_H
-#ifdef __cplusplus
-extern "C" {
-#endif
+
 #include <mraa.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -101,7 +99,5 @@ mraa_spi_context dev;
 char spi_rx[256];
 struct spi_ioc_transfer spi_msg;
 void initGPIO();
-#ifdef __cplusplus
-}
-#endif
+
 #endif
