@@ -5,8 +5,7 @@
 #include <sys/ioctl.h>
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
-#include <mraa.h>
-#include "mraa/gpios.h"
+#include "mraa/gpio.h"
 #include "spi.h"
 #define LED_PIN      44        /**< The pin where the LED is connected */
 
