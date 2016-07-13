@@ -97,4 +97,5 @@ struct _spi {
 mraa_spi_context dev;
 char spi_rx[256];
 struct spi_ioc_transfer spi_msg;
+void initGPIO();
 #endif
