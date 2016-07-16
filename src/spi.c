@@ -15,7 +15,7 @@ void Write(char* data, char length) {
     datab = 1;
     spi_msg.rx_buf = 0; // Block SPI from reading anything.
     spi_msg.tx_buf = (unsigned long)&datab;
-    spi_msg.len = 1;
+    spi_msg.len = length;
     mraa_gpio_write(gpio, 0);
     printf("Sending data\n");
     if (ioctl(dev->devfd, SPI_IOC_MESSAGE(1), &spi_msg) < 0) {
