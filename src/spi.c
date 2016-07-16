@@ -22,11 +22,7 @@ void Write(char* data, char length) {
 }
 char* WriteRead(char* data, char length) {
 
-    spi_msg.tx_buf = (unsigned long) data;
-    spi_msg.len = length;
-    mraa_gpio_write(gpio, 0);
- 
-    mraa_gpio_write(gpio, 1);
+
     return 0;
 }
 void initGPIO(){
