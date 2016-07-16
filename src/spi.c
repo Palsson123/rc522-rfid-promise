@@ -34,10 +34,17 @@ char *WriteRead(char* data, char length) {
 
 }
 void initGPIO(){
+    mraa_result_t r = MRAA_SUCCESS;
     mraa_init();
-    gpio = mraa_gpio_init_raw(1);
-    mraa_gpio_dir(gpio, MRAA_GPIO_OUT);
-    
+    gpio = mraa_gpio_init(1);
+    if (gpio == NULL) {
+        fprintf(stderr, "Are you sure that pin%d you requested is valid on your platform?", iopin);
+        exit(1);
+    }
+    r = mraa_gpio_dir(gpio, MRAA_GPIO_OUT);
+    if (r != MRAA_SUCCESS) {
+        mraa_result_print(r);
+    }
     dev = (mraa_spi_context) calloc(1, sizeof(struct _spi));
     
     memset(&spi_msg, 0, sizeof(spi_msg));
