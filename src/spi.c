@@ -32,7 +32,7 @@ char* WriteRead(char* data, char length) {
     return spi_rx;
 }
 void initGPIO(){
-    spi_rx = malloc(16)
+    spi_rx = (char*)malloc(256)
     gpio = mraa_gpio_init_raw(1);
     mraa_gpio_dir(gpio, MRAA_GPIO_OUT);
 }
