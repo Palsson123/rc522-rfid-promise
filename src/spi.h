@@ -14,7 +14,7 @@ extern "C" {
 #endif
 
 void Write(char* data, char length);
-char* WriteRead(char* data, char length);
+char WriteRead(char* data, char length);
 void initGPIO();
 #ifdef __cplusplus
 }
