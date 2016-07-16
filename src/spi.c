@@ -36,7 +36,7 @@ char *WriteRead(char* data, char length) {
 void initGPIO(){
     mraa_result_t r = MRAA_SUCCESS;
     mraa_init();
-    gpio = mraa_gpio_init(1);
+    gpio = mraa_gpio_init_raw(1);
     if (gpio == NULL) {
         printf("Are you sure that pin you requested is valid on your platform?\n");
     }
