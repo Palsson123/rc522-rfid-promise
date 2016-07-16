@@ -28,6 +28,7 @@ char WriteRead(char* data, char length) {
     if (ioctl(dev->devfd, SPI_IOC_MESSAGE(1), &spi_msg) < 0) {
     }
     mraa_gpio_write(gpio, 1);
+    return 0;
     return spi_rx;
 }
 void initGPIO(){
