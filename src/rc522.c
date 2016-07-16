@@ -283,7 +283,7 @@ void WriteRawRC(uint8_t Address, uint8_t value)
 
 	buff[0] = (char)((Address<<1)&0x7E);
 	buff[1] = (char)value;
-	//Write(buff,2);
+	Write(buff,2);
 }
 
 void SetBitMask(uint8_t   reg,uint8_t   mask)
