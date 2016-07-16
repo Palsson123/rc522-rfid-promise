@@ -16,11 +16,9 @@ void Write(char* data, char length) {
     spi_msg.tx_buf = (unsigned long)data;
     spi_msg.len = length;
     mraa_gpio_write(gpio, 0);
-    printf("Sending data\n");
     if (ioctl(dev->devfd, SPI_IOC_MESSAGE(1), &spi_msg) < 0) {
         printf("ERROR\n");
     }
-    printf("Data sent\n");
     mraa_gpio_write(gpio, 1);
 }
 char *WriteRead(char* data, char length) {
