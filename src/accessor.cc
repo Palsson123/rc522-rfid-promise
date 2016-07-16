@@ -90,7 +90,7 @@ void Init(Handle<Object> exports, Handle<Object> module) {
 
 uint8_t initRfidReader(void) {
 
-        //initGPIO();
+        initGPIO();
         return 0;
 }
 
