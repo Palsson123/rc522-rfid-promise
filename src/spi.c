@@ -38,8 +38,7 @@ void initGPIO(){
     mraa_init();
     gpio = mraa_gpio_init(1);
     if (gpio == NULL) {
-        fprintf(stderr, "Are you sure that pin%d you requested is valid on your platform?", iopin);
-        exit(1);
+        printf(stderr, "Are you sure that pin you requested is valid on your platform?");
     }
     r = mraa_gpio_dir(gpio, MRAA_GPIO_OUT);
     if (r != MRAA_SUCCESS) {
