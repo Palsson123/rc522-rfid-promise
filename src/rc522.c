@@ -273,7 +273,6 @@ uint8_t ReadRawRC(uint8_t Address)
 {
 	char buff[2];
 	buff[0] = ((Address<<1)&0x7E)|0x80;
-	return 1;
 	return (uint8_t)WriteRead(buff,1); 
 }
 
