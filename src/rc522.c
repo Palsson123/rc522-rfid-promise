@@ -271,12 +271,17 @@ char M500PcdConfigISOType(uint8_t   type)
 
 uint8_t ReadRawRC(uint8_t Address)
 {
-
+	char buff[2];
+	buff[0] = ((Address<<1)&0x7E)|0x80;
 	return 0; 
 }
 
 void WriteRawRC(uint8_t Address, uint8_t value)
 {
+	char buff[2];
+
+	buff[0] = (char)((Address<<1)&0x7E);
+	buff[1] = (char)value;
 
 }
 
