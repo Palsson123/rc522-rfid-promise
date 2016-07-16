@@ -39,4 +39,21 @@ char WriteRead(char* data, char length) {
 void initGPIO(){
     gpio = mraa_gpio_init_raw(1);
     mraa_gpio_dir(gpio, MRAA_GPIO_OUT);
+    
+    dev = (mraa_spi_context) calloc(1, sizeof(struct _spi));
+    
+    memset(&spi_msg, 0, sizeof(spi_msg));
+
+    char path[64];
+    sprintf(path, "/dev/spidev%u.%u", 32766,1);
+
+    dev->devfd = open(path, O_RDWR);
+
+    char length = 1;
+    spi_msg.tx_buf = 0;
+    spi_msg.rx_buf = 0;
+    spi_msg.speed_hz = 7000000;
+    spi_msg.bits_per_word = 8;
+    spi_msg.delay_usecs = 0;
+    spi_msg.len = length;
 }
