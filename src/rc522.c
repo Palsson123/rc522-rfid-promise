@@ -274,6 +274,7 @@ uint8_t ReadRawRC(uint8_t Address)
 	char buff[2];
 	buff[0] = ((Address<<1)&0x7E)|0x80;
 	return 1;
+	//return (uint8_t)WriteRead(buff,1); 
 }
 
 void WriteRawRC(uint8_t Address, uint8_t value)
@@ -282,7 +283,7 @@ void WriteRawRC(uint8_t Address, uint8_t value)
 
 	buff[0] = (char)((Address<<1)&0x7E);
 	buff[1] = (char)value;
-	Write(buff,2);
+	//Write(buff,2);
 }
 
 void SetBitMask(uint8_t   reg,uint8_t   mask)
