@@ -34,7 +34,7 @@ char *WriteRead(char* data, char length) {
 
 }
 void initGPIO(){
-    gpio = mraa_gpio_init_raw(1);
+    gpio = mraa_gpio_init(1);
     mraa_gpio_dir(gpio, MRAA_GPIO_OUT);
     
     dev = (mraa_spi_context) calloc(1, sizeof(struct _spi));
