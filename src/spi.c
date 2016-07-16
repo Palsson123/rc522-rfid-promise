@@ -11,14 +11,7 @@
 #define LED_PIN      44        /**< The pin where the LED is connected */
 
 void Write(char* data, char length) {
-    
-    spi_msg.rx_buf = 0; // Block SPI from reading anything.
-    spi_msg.tx_buf = (unsigned long)data;
-    spi_msg.len = length;
-    mraa_gpio_write(gpio, 0);
-          if (ioctl(dev->devfd, SPI_IOC_MESSAGE(1), &spi_msg) < 0) {
-    }
-    mraa_gpio_write(gpio, 1);
+
 }
 char* WriteRead(char* data, char length) {
 
