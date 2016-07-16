@@ -21,7 +21,7 @@ void Write(char* data, char length) {
     mraa_gpio_write(gpio, 1);
 }
 char* WriteRead(char* data, char length) {
-    spi_msg.rx_buf = (unsigned long) spi_rx; // Block SPI from reading anything.
+
     spi_msg.tx_buf = (unsigned long) data;
     spi_msg.len = length;
     mraa_gpio_write(gpio, 0);
