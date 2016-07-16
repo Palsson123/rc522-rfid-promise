@@ -275,7 +275,6 @@ uint8_t ReadRawRC(uint8_t Address)
 	buff[0] = ((Address<<1)&0x7E)|0x80;
 	char res;
 	res =(uint8_t)WriteRead(buff,1)[0];
-	printf("result=%x\n", res);
 	return res; 
 }
 
