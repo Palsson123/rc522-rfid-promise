@@ -38,10 +38,11 @@ void initGPIO(){
     mraa_init();
     gpio = mraa_gpio_init(1);
     if (gpio == NULL) {
-        printf(stderr, "Are you sure that pin you requested is valid on your platform?");
+        printf("Are you sure that pin you requested is valid on your platform?\n");
     }
     r = mraa_gpio_dir(gpio, MRAA_GPIO_OUT);
     if (r != MRAA_SUCCESS) {
+        printf("Error in putting pin direction\n");
         mraa_result_print(r);
     }
     dev = (mraa_spi_context) calloc(1, sizeof(struct _spi));
