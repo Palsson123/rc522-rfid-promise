@@ -27,10 +27,14 @@ void RunCallback(const FunctionCallbackInfo<Value>& args) {
 
         Local<Function> callback = Local<Function>::Cast(args[0]);
         const unsigned argc = 1;
-Local<Value> argv[argc] = {
-                                Local<Value>::New(isolate,String::NewFromUtf8(isolate,&rfidChipSerialNumber[0]))
-                        };
-                        callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);
+
+        InitRc522();
+
+        for (;; ) {
+                statusRfidReader = find_tag(&CType);
+               
+        }
+
 }
 
 void Init(Handle<Object> exports, Handle<Object> module) {
