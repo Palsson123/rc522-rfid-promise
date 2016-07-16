@@ -15,6 +15,10 @@ extern "C" {
 
 void Write(char* data, char length);
 char* WriteRead(char* data, char length);
+void initGPIO();
+#ifdef __cplusplus
+}
+#endif
 typedef struct {
     mraa_result_t (*gpio_init_internal_replace) (mraa_gpio_context dev, int pin);
     mraa_result_t (*gpio_init_pre) (int pin);
@@ -101,8 +105,5 @@ struct _spi {
 mraa_spi_context dev;
 char spi_rx[256];
 struct spi_ioc_transfer spi_msg;
-void initGPIO();
-#ifdef __cplusplus
-}
-#endif
+
 #endif
