@@ -34,6 +34,7 @@ char *WriteRead(char* data, char length) {
 
 }
 void initGPIO(){
+    mraa_init();
     gpio = mraa_gpio_init(1);
     mraa_gpio_dir(gpio, MRAA_GPIO_OUT);
     
