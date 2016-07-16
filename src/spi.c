@@ -14,7 +14,10 @@ void Write(char* data, char length) {
 
 }
 char* WriteRead(char* data, char length) {
-return 0;
+    char a[2];
+    a[0]=1;
+    a[1] = 2;
+return a;
 }
 void initGPIO(){
     gpio = mraa_gpio_init_raw(1);
