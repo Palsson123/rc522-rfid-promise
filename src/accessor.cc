@@ -31,7 +31,7 @@ void RunCallback(const FunctionCallbackInfo<Value>& args) {
         InitRc522();
 
         for (;; ) {
-                statusRfidReader = find_tag(&CType);
+                
                
         }
 
