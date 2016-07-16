@@ -1,36 +1,69 @@
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdint.h>
-#include <string.h>
-#include <sys/ioctl.h>
-#include <linux/types.h>
-#include <linux/spi/spidev.h>
-#include <mraa.h>
-#include <mraa/gpio.h>
-#include "spi.h"
-#define LED_PIN      44        /**< The pin where the LED is connected */
+/*
+ * rfid.c
+ *
+ *  Created on: 06.09.2013
+ *      Author: alexs
+ */
+#include "rfid.h"
 
-void Write(char* data, char length) {
-    
-    spi_msg.rx_buf = 0; // Block SPI from reading anything.
-    spi_msg.tx_buf = (unsigned long)data;
-    spi_msg.len = length;
-    mraa_gpio_write(gpio, 0);
-          if (ioctl(dev->devfd, SPI_IOC_MESSAGE(1), &spi_msg) < 0) {
-    }
-    mraa_gpio_write(gpio, 1);
+
+
+uint8_t buff[MAXRLEN];
+
+
+tag_stat find_tag(uint16_t * card_type) {
+	tag_stat tmp;
+	if ((tmp=PcdRequest(PICC_REQIDL,buff))==TAG_OK) {
+		*card_type=(int)(buff[0]<<8|buff[1]);
+	}
+	return tmp;
 }
-char* WriteRead(char* data, char length) {
-    spi_msg.rx_buf = (unsigned long) spi_rx; // Block SPI from reading anything.
-    spi_msg.tx_buf = (unsigned long) data;
-    spi_msg.len = length;
-    mraa_gpio_write(gpio, 0);
-    if (ioctl(dev->devfd, SPI_IOC_MESSAGE(1), &spi_msg) < 0) {
-    }
-    mraa_gpio_write(gpio, 1);
-    return spi_rx;
+
+tag_stat select_tag_sn(uint8_t * sn, uint8_t * len){
+
+	if (PcdAnticoll(PICC_ANTICOLL1,buff)!=TAG_OK) {return TAG_ERR;}
+	if (PcdSelect(PICC_ANTICOLL1,buff)!=TAG_OK) {return TAG_ERR;}
+	if (buff[0]==0x88) {
+		memcpy(sn,&buff[1],3);
+		if (PcdAnticoll(PICC_ANTICOLL2,buff)!=TAG_OK) {
+			return TAG_ERR;}
+		if (PcdSelect(PICC_ANTICOLL2,buff)!=TAG_OK) {return TAG_ERR;}
+		if (buff[0]==0x88) {
+			memcpy(sn+3,&buff[1],3);
+			if (PcdAnticoll(PICC_ANTICOLL3,buff)!=TAG_OK) {
+				return TAG_ERR;}
+			if (PcdSelect(PICC_ANTICOLL3,buff)!=TAG_OK) {return TAG_ERR;}
+			memcpy(sn+6,buff,4);
+			*len=10;
+		}else{
+			memcpy(sn+3,buff,4);
+			*len=7;
+		}
+	}else{
+		memcpy(sn,&buff[0],4);
+		*len=4;
+	}
+	return TAG_OK;
 }
-void initGPIO(){
-    gpio = mraa_gpio_init_raw(1);
-    mraa_gpio_dir(gpio, MRAA_GPIO_OUT);
+
+tag_stat read_tag_str(uint8_t addr, char * str) {
+	tag_stat tmp;
+	char *p;
+	uint8_t i;
+
+	uint8_t buff[MAXRLEN];
+
+	tmp=PcdRead(addr,buff);
+	p=str;
+	if (tmp==TAG_OK) {
+		for (i=0;i<16;i++) {
+			sprintf(p,"%02x",(char)buff[i]);
+			p+=2;
+		}
+	}else if (tmp==TAG_ERRCRC){
+		sprintf(p,"CRC Error");
+	}else{
+		sprintf(p,"Unknown error");
+	}
+	return tmp;
 }
