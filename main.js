@@ -2,9 +2,7 @@ var spawn = require('child_process').spawn;
 var readline = require('readline');
 var Q = require('q');
 var child = null;
-var rc522 = require('./build/Release/rc522');
-module.exports = rc522;
-/*exports.startListening = function(timeout) {
+exports.startListening = function(timeout) {
   var deferred = Q.defer();
   var returnValue = 'none';
   var success = false;
@@ -74,4 +72,4 @@ process.once("uncaughtException", function(error) {
     throw error;
   }
 });
-*/
+

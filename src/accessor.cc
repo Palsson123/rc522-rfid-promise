@@ -1,6 +1,7 @@
 #include <node.h>
 #include <v8.h>
 #include <unistd.h>
+#include <uv.h>
 #include "rfid.h"
 #include "spi.h"
 #include "rc522.h"
