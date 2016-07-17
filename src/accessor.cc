@@ -54,7 +54,6 @@ void RunCallback(const FunctionCallbackInfo<Value>& args) {
                 if (select_tag_sn(serialNumber,&serialNumberLength) != TAG_OK) {
                         continue;
                 }
-
                 // Is a successful detected, the counter will be set to zero
                 noTagFoundCount = 0;
 
