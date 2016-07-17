@@ -25,13 +25,24 @@ using namespace v8;
 void RunCallback(const FunctionCallbackInfo<Value>& args) {
         Isolate* isolate=Isolate::GetCurrent();
         HandleScope scope(isolate);
-
+	int sleepTime = 200000; 
+	int timeout = args[1]->Int32Value(); //milliseconds 
+	int counter = 0;
         Local<Function> callback = Local<Function>::Cast(args[0]);
         const unsigned argc = 1;
 
         InitRc522();
 
         for (;; ) {
+		if(counter >=timeout)
+		{
+			Local<Value> argv[argc] = {
+                      	  Local<Value>::New(isolate,String::NewFromUtf8(isolate,"undefined"))
+                        };
+                        callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);
+			counter=0;
+			break;
+		}
                 statusRfidReader = find_tag(&CType);
                 if (statusRfidReader == TAG_NOTAG) {
 
@@ -45,8 +56,9 @@ void RunCallback(const FunctionCallbackInfo<Value>& args) {
                         else {
                                 noTagFoundCount++;
                         }
-
-                        usleep(200000);
+			
+                        usleep(sleepTime);
+			counter += sleepTime/1000; //Convert sleeptime to milliseconds	
                         continue;
                 } else if (statusRfidReader != TAG_OK && statusRfidReader != TAG_COLLISION) {
                         continue;
@@ -72,6 +84,7 @@ void RunCallback(const FunctionCallbackInfo<Value>& args) {
                                 Local<Value>::New(isolate,String::NewFromUtf8(isolate,&rfidChipSerialNumber[0]))
                         };
                         callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);
+			break;
                 }
 
                 // Preserves the current detected serial number, so that it can be used
